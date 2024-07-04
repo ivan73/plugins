@@ -164,19 +164,19 @@ siehe auch example.yaml
 
 Changelog
 ---------
+V1.0.13 Fehler behoben: wenn pause_item nicht verwendet
+        Plugin mit stop/run/pause_item steuerbar
+
 V1.0.12 Problem beim Schreiben ohne modBusObjectTyp behoben
         bei wiederholten Verbindungsproblemen Ausgabe vom Logger reduziert
-        Verbindungstop mit supend/resume steuerbar
 
 V1.0.11	Verbesserung Umwandlung Byte/Wordorder in Endian-Konstante
         Fehler beim Schreiben von Register behoben
 
 V1.0.10	Mindestversion für pymodbus ist nun 3.5.2
 
-V1.0.9  
-
 V1.0.8  Neuere Pymodbus Versionen können nun verwendet werden.
-        Di minimale Version für Pymodbus ist jetzt 2.5.3
+        Die minimale Version für Pymodbus ist jetzt 2.5.3
 
 V1.0.7  Verbindung offen halten und lock nutzen um Thread Sicherheit zu erreichen (CaeruleusAqua and bmxp)
         Fehler behoben: nicht deklarierte Variable "TypeStr" und "bitstr"

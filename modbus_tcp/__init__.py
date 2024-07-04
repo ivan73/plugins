@@ -88,7 +88,8 @@ class modbus_tcp(SmartPlugin):
 
         self._slaveUnit = self.get_parameter_value('slaveUnit')
         self._slaveUnitRegisterDependend = False
-
+        
+        self._pause_item = None
         self._pause_item_path = self.get_parameter_value('pause_item')
 
         self._sh = sh
@@ -108,6 +109,9 @@ class modbus_tcp(SmartPlugin):
         """
         self.logger.debug(f"Plugin '{self.get_fullname()}': run method called")
         if self.alive:
+            return
+        if self._pause_item is not None and bool(self._pause_item()):
+            self.logger.info(f'plugin not startet - pause_item is True')
             return
 
         self.alive = True
@@ -315,6 +319,14 @@ class modbus_tcp(SmartPlugin):
                     self.run()
             return
 
+        if not self.alive:
+            if not hasattr(self, 'notalive_log_update') or self.notalive_log_update is False:   # log - Nachricht nur 1x ausgeben
+                self.logger.info('Plugin is not alive, data will not be written')
+                self.notalive_log_update = True
+            return
+        else:
+            self.notalive_log_update = False
+            
         if caller == self.get_fullname():
             # self.logger.debug(f'item was changed by the plugin itself - caller:{caller} source:{source} dest:{dest}')
             return
